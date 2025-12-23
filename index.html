@@ -43,7 +43,7 @@
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
         #camera-preview {
-            position: absolute; top: 15px; right: 15px;
+            position: none; top: 15px; right: 15px;
             width: 120px; height: 90px;
             border: 2px solid rgba(255,0,0,0.5); 
             transform: scaleX(-1); opacity: 0.6; border-radius: 8px;
@@ -75,9 +75,9 @@
         bgMusic.loop = true; bgMusic.volume = 1.0;
 
         const loader = new THREE.TextureLoader();
-        const photoFiles = ['./image1.jpeg', './image2.jpeg', './image3.jpeg', './image4.jpeg', './image5.jpeg'];
+        const photoFiles = ['./image1.jpeg', './image2.jpeg', './image3.jpeg', './image4.jpeg', './image5.jpeg','./image6.jpeg'];
         const photoTextures = [];
-        photoFiles.forEach((f, i) => photoTextures[i] = loader.load(f));
+        photoFiles.forEach((f, i) => {photoTextures[i] = loader.load(f);console.log(i)});
 
         // --- Vandiep ---
         function createCustomTexture(type) {
@@ -234,7 +234,7 @@
             const borderGeo = new THREE.PlaneGeometry(9, 9); 
             const borderMat = new THREE.MeshBasicMaterial({ color: 0xFFD700 }); 
 
-            for(let i=0; i<5; i++) {
+            for(let i=0; i<6; i++) {
                 const mat = new THREE.MeshBasicMaterial({ 
                     map: photoTextures[i], side: THREE.DoubleSide 
                 });
@@ -341,7 +341,7 @@
                 titleMesh.visible = false; starMesh.visible = false;
                 
                 const baseAngle = groupGold.rotation.y; 
-                const angleStep = (Math.PI * 2) / 5;
+                const angleStep = (Math.PI * 2) / 6;
                 let bestIdx = 0; let maxZ = -999;
 
                 photoMeshes.forEach((mesh, i) => {
